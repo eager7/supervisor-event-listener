@@ -38,9 +38,17 @@ func listen(key string) {
 			failure(err)
 			continue
 		}
-		// 处理进程异常退出事件
 		msg := event.Message{Header: header, Payload: payload}
-		_ = utils.WxRobotWarn(msg.String(), key)
+		switch header.EventName {
+		case "PROCESS_STATE_EXITED", "PROCESS_STATE_BACKOFF", "PROCESS_STATE_STOPPED", "PROCESS_STATE_FATAL":
+			_ = utils.WxRobotWarn(msg.String(), key)
+		case "PROCESS_STATE_STARTING", "PROCESS_STATE_UNKNOWN", "PROCESS_STATE_STOPPING":
+			_ = utils.WxRobotDebug(msg.String(), key)
+		case "PROCESS_STATE_RUNNING":
+			_ = utils.WxRobotInfo(msg.String(), key)
+		default:
+			_ = utils.WxRobotDebug(msg.String(), key)
+		}
 		success()
 	}
 }
