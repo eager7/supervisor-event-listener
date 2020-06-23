@@ -16,8 +16,18 @@ type Message struct {
 }
 
 func (msg *Message) String() string {
-	return fmt.Sprintf("Host: %s\nProcess: %s\nPID: %d\nEXITED FROM state: %s", msg.Payload.Ip, msg.Payload.ProcessName, msg.Payload.Pid, msg.Payload.FromState)
-
+	return fmt.Sprintf(`程序状态变化事件通知：
+程序名称：%s
+事件内容：%s
+程序原状态：%s
+服务器IP：%s
+进程号：%d
+`,
+msg.Payload.ProcessName,
+msg.Header.EventName,
+msg.Payload.FromState,
+msg.Payload.Ip,
+msg.Payload.Pid)
 }
 
 // Header Supervisord触发事件时会先发送Header，根据Header中len字段去读取Payload

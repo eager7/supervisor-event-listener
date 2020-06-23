@@ -2,7 +2,6 @@ package listener
 
 import (
 	"bufio"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/eager7/supervisor-event-listener/event"
@@ -15,17 +14,17 @@ var (
 	ErrPayloadLength = errors.New("Header中len长度与实际读取长度不一致")
 )
 
-func Start() {
+func Start(key string) {
 	defer func() {
 		if err := recover(); err != nil {
 			log.Print("panic", err)
 		}
 	}()
-	listen()
+	listen(key)
 }
 
 // 监听事件, 从标准输入获取事件内容
-func listen() {
+func listen(key string) {
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		ready()
@@ -41,10 +40,8 @@ func listen() {
 		}
 		// 只处理进程异常退出事件
 		if header.EventName == "PROCESS_STATE_EXITED" {
-			//notify.Push(header, payload)
-			msg := event.Message{Header:header, Payload:payload}
-			data, _:=json.Marshal(msg)
-			_=utils.WxRobotWarn(string(data), "ffaef543-6649-4c8e-8d6e-50cbdb6dc3f7")
+			msg := event.Message{Header: header, Payload: payload}.String()
+			_ = utils.WxRobotWarn(msg, key)
 		}
 		success()
 	}
