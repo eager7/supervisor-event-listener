@@ -2,10 +2,11 @@ package listener
 
 import (
 	"bufio"
+	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/ouqiang/supervisor-event-listener/event"
-	"github.com/ouqiang/supervisor-event-listener/listener/notify"
+	"github.com/eager7/supervisor-event-listener/event"
+	"github.com/eager7/supervisor-event-listener/utils"
 	"log"
 	"os"
 )
@@ -40,7 +41,10 @@ func listen() {
 		}
 		// 只处理进程异常退出事件
 		if header.EventName == "PROCESS_STATE_EXITED" {
-			notify.Push(header, payload)
+			//notify.Push(header, payload)
+			msg := event.Message{Header:header, Payload:payload}
+			data, _:=json.Marshal(msg)
+			_=utils.WxRobotWarn(string(data), "ffaef543-6649-4c8e-8d6e-50cbdb6dc3f7")
 		}
 		success()
 	}

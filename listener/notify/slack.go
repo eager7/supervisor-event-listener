@@ -3,9 +3,9 @@ package notify
 import (
 	"errors"
 	"fmt"
-	"github.com/ouqiang/supervisor-event-listener/utils/httpclient"
-	"github.com/ouqiang/supervisor-event-listener/event"
-	"github.com/ouqiang/supervisor-event-listener/utils"
+	"github.com/eager7/supervisor-event-listener/event"
+	"github.com/eager7/supervisor-event-listener/utils"
+	"github.com/eager7/supervisor-event-listener/utils/httpclient"
 )
 
 type Slack struct{}

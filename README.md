@@ -6,10 +6,10 @@ Supervisor是*nix环境下的进程管理工具, 可以把前台进程转换为�
 supervisor-event-listener监听进程异常退出事件, 并发送通知.
   
 ## 下载
-[v1.0](https://github.com/ouqiang/supervisor-event-listener/releases)
+[v1.0](https://github.com/eager7/supervisor-event-listener/releases)
 
 ### 源码安装
-* `go get -u github.com/ouqiang/supervisor-event-listener`
+* `go get -u github.com/eager7/supervisor-event-listener`
 
 ## Supervisor配置
 ```ini
