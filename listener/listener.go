@@ -40,8 +40,8 @@ func listen(key string) {
 		}
 		// 只处理进程异常退出事件
 		if header.EventName == "PROCESS_STATE_EXITED" {
-			msg := event.Message{Header: header, Payload: payload}.String()
-			_ = utils.WxRobotWarn(msg, key)
+			msg := event.Message{Header: header, Payload: payload}
+			_ = utils.WxRobotWarn(msg.String(), key)
 		}
 		success()
 	}
