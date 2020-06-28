@@ -43,9 +43,9 @@ func listen(key string) {
 		case "PROCESS_STATE_EXITED", "PROCESS_STATE_BACKOFF", "PROCESS_STATE_STOPPED", "PROCESS_STATE_FATAL":
 			_ = utils.WxRobotWarn(msg.String(), key)
 		case "PROCESS_STATE_STARTING", "PROCESS_STATE_UNKNOWN", "PROCESS_STATE_STOPPING":
-			_ = utils.WxRobotDebug(msg.String(), key)
+			fmt.Println(msg.String())
 		case "PROCESS_STATE_RUNNING":
-			_ = utils.WxRobotInfo(msg.String(), key)
+			fmt.Println(msg.String())
 		default:
 			_ = utils.WxRobotDebug(msg.String(), key)
 		}
