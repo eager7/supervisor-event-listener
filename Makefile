@@ -1,6 +1,6 @@
 #/bin/bash
 # This is how we want to name the binary output
-TARGET_SERVER=listener
+TARGET_SERVER=supervisor-event-listener
 
 SERVER_SRC=main.go
 # These are the values we want to pass for Version and BuildTime
