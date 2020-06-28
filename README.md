@@ -7,6 +7,7 @@ supervisor-event-listener监听进程异常退出事件, 并发送通知.
 
 ### 源码安装
 * `go get -u github.com/eager7/supervisor-event-listener`
+* `wget https://raw.githubusercontent.com/eager7/supervisor-event-listener/master/build/supervisor-event-listener`
 
 ## Supervisor配置
 ```ini
